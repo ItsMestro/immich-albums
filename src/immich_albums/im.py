@@ -88,6 +88,7 @@ class ImmichAlbums:
             full_path = os.path.join(folder, filename)
             if os.path.isfile(full_path):
                 replaced_path = full_path.replace(original_path, replace_path)
+                replaced_path = replaced_path.replace("\\", "/")
                 print(f"searching for: {replaced_path}")
                 asset_id = self.get_asset_by_original_path(replaced_path)
                 if asset_id is None:
@@ -145,11 +146,11 @@ class ImmichAlbums:
                     print(f"Skipping folder: {folder_name}")
                     continue
                 print(f"Processing folder: {folder_name}\n")
-                self.create_album_from_folder(path, original_path, replace_path, dry_run, skip_existing=skip_existing)
+                self.create_album_from_folder(folder_name, original_path, replace_path, dry_run, skip_existing=skip_existing)
 
                 for sub_folder in sub_folders:
-                    path = os.path.join(folder_name, sub_folder)
-                    self.create_albums_from_folder(path, original_path, replace_path, True, dry_run,
+                    new_path = os.path.join(folder_name, sub_folder)
+                    self.create_albums_from_folder(new_path, original_path, replace_path, True, dry_run,
                                                    skip=skip,
                                                    skip_existing=skip_existing)
         else:

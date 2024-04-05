@@ -1,1 +1,4 @@
 .idea
+config.yaml
+sync_album_commands.txt
+poetry/poetry.exe
